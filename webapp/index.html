@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html ng-app="imageMarker">
+    <head>
+        <script type="text/javascript" src="angular.js"></script>
+        <script type="text/javascript" src="app.js"></script>
+    </head>
+    <style type="text/css">
+    </style>
+    <body>
+        <div ng-controller="ImageListCtrl">
+            <input ng-model="directory" placeholder="Enter the image directory">
+            <button type="button" ng-click="loadImages(directory)">Load the images</button>
+            <div ng-show="!images">No images loaded</div>
+            <div ng-show="images && !images.length">Empty array of images</div>
+            <ul ng-repeat="image in images">
+                <li>{{image.name}}</li>
+            </ul>
+        </div>
+    </body>
+</html>
