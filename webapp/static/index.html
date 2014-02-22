@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html ng-app="imageMarker">
+    <head>
+        <script type="text/javascript" src="angular.js"></script>
+        <script type="text/javascript" src="clientapp.js"></script>
+    </head>
+    <style type="text/css">
+        button {
+            overflow: hidden;
+            margin: 0;
+        }
+        img {
+            border: 0;
+            padding: 0;
+        }
+        .center-marker {
+            width: 8px;
+            height: 8px;
+            border-radius: 4px;
+            background-color: rgba(255, 0, 0, 0.5);
+            position: absolute;
+        }
+        .crop-marker {
+            position: absolute;
+            background-color: rgba(0, 0, 0, 0.2);
+        }
+        #wrapper {
+            position: relative;
+            display: inline-block;
+            border: 1px dashed black;
+        }
+    </style>
+    <body>
+        <div ng-controller="ImageListCtrl">
+            
+            <button type=button tabindex=3 ng-show="metadata.isWatch" ng-click="markWatch(image, false)">Not a watch</button>
+            <button type=button tabindex=3 ng-show="!metadata.isWatch" ng-click="markWatch(image, true)">Is a watch</button>
+            <button type=button tabindex=2 ng-click="goPrevious()">Prev</button>
+            <button type=button tabindex=1 ng-click="goNext()">Next</button>
+            <br>
+            Image: {{image}}
+            <br>
+            <div id="wrapper" ng-mousemove="mousemove($event)" ng-mouseup="mouseup($event)" ng-mousedown="mousedown($event)">
+                <div class="center-marker" ng-show="metadata.center" ng-style="{ left: (metadata.center.x - 4) + 'px', top: (metadata.center.y - 4) + 'px' }"></div>
+                <div class="crop-marker" ng-show="metadata.crop" 
+                    ng-style="{ left: metadata.crop.topLeft.x + 'px', top: metadata.crop.topLeft.y + 'px', height: metadata.crop.height + 'px', width: metadata.crop.width + 'px' }"></div>
+                <img id="theimage" src="{{image}}" draggable="false" ng-show="loaded()">
+            </div>
+            <br>
+            <p ng-show="prefix.length">Showing images with prefix {{prefix}}</p>
+            <p ng-show="!prefix || !prefix.length">Showing all images</p>
+        </div>
+    </body>
+</html>
