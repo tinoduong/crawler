@@ -3,7 +3,7 @@ pushd . > /dev/null
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 ALL_IMAGE_DIR="${DIR}/webapp/images"
 
-unzip "${DIR}/Brands.zip"
+unzip "${DIR}/data_files/Brands.zip"
 
 if ! [[ -d "${ALL_IMAGE_DIR}" ]]; then 
     mkdir "${ALL_IMAGE_DIR}"

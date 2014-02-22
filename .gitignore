@@ -3,3 +3,5 @@ webapp/images
 Brands
 node_modules
 .DS_Store
+.idea
+.gitignore~
