@@ -12,7 +12,7 @@ angular.module('imageMarker', [])
 
             currentIndex = index;
             $scope.image = image;
-            
+
             loadedMetadataFor = null;
             $http({ method: 'GET', url: '/' + encodeURIComponent($scope.image) + '/metadata' }).
                 success(function (data) {
@@ -63,21 +63,30 @@ angular.module('imageMarker', [])
         }
        
 
-        $scope.prefix = $location.search().p;
+        $scope.user = 'tino'; // just so something is set
 
         $scope.goNext = function () {
-            var index = currentIndex + 1;
 
-            while (currentIndex < images.length && ($scope.prefix && images[index].indexOf($scope.prefix) !== 0)) {
+            var index = currentIndex + 1,
+                comp = $scope.user === 'tino' ?
+                    function (x) { return parseInt(x[0], 10) < 8; }
+                    :
+                    function (x) { return parseInt(x[0], 10) >= 8 };
+
+            while (currentIndex < images.length && !comp(images[index])) {
                 index++;
             }
             setIndex(index);
         };
 
         $scope.goPrevious = function () {
-            var index = currentIndex - 1;
+            var index = currentIndex - 1,
+                comp = $scope.user === 'tino' ?
+                    function (x) { return parseInt(x[0], 10) < 8; }
+                    :
+                    function (x) { return parseInt(x[0], 10) >= 8 };
 
-            while (currentIndex >= 0 && ($scope.prefix && images[index].indexOf($scope.prefix) !== 0)) {
+            while (currentIndex >= 0 && !comp(images[index])) {
                 index--;
             }
             setIndex(index);

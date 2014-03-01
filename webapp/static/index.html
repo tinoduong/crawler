@@ -32,7 +32,14 @@
     </style>
     <body>
         <div ng-controller="ImageListCtrl">
-            
+
+            <label><input type=radio name=user value=tino ng-model="user"> Tino</label>
+            <br>
+            <label><input type=radio name=user value=morgan ng-model="user"> Morgan</label>
+
+            <br>
+            <br>
+
             <button type=button tabindex=3 ng-show="metadata.isWatch" ng-click="markWatch(image, false)">Not a watch</button>
             <button type=button tabindex=3 ng-show="!metadata.isWatch" ng-click="markWatch(image, true)">Is a watch</button>
             <button type=button tabindex=2 ng-click="goPrevious()">Prev</button>
