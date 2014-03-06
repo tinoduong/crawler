@@ -5,6 +5,17 @@ angular.module('imageMarker', [])
     .controller('ImageListCtrl', ['$scope', '$window', '$http', '$location', function ($scope, $wndw, $http, $location) {
         var images, currentIndex, loadedMetadataFor, startCropPosition;
 
+        function createRange(max) {
+            var i,  r = [];
+            for (i = 1; i <= max; i++) r.push(i);
+            return r;
+        }
+
+        $scope.hours = createRange(12);
+        $scope.minutes = createRange(60);
+        $scope.seconds = createRange(60);
+
+
         function setIndex(index) {
             if (index < 0 || index > images.length) return;
 
@@ -121,6 +132,8 @@ angular.module('imageMarker', [])
 
             startCropPosition = void 0;
         };
+
+        $scope.saveMetadata = saveMetadata;
 
         $scope.mousemove = function ($event) {
             if (startCropPosition === void 0) return;
